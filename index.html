@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body class="main">
+    <div id="buttons" onclick="btn_click()" style="border: 1px solid black; width: max-content;">
+        <button class="btn" id="0">-</button>
+        <button class="btn" id="1">-</button>
+        <button class="btn" id="2">-</button><br>
+        <button class="btn" id="3">-</button>
+        <button class="btn" id="4">-</button>
+        <button class="btn" id="5">-</button><br>
+        <button class="btn" id="6">-</button>
+        <button class="btn" id="7">-</button>
+        <button class="btn" id="8">-</button>
+    </div>
+    <div>
+        <input class="textbox" type="text" id="UItext" value="player X please start the game">
+    </div>
+
+    <script>
+
+        let playerFlag = "X"
+        let tictacLst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
+
+        let wins = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
+        [1, 4, 7], [2, 5, 8], [3, 6, 9],
+        [1, 5, 9], [3, 5, 7]]
+
+        function btn_click() {
+            if (event.target.innerText == "-") {
+                event.target.innerText = playerFlag
+                tictacLst[event.target.id] = playerFlag
+                console.log(tictacLst);
+                if (winCheck()) {
+                    msgChanger(true)
+
+                }else{
+                    playerFlag = playerFlag == "X" ? "O" : "X"
+                msgChanger()
+                }
+            }
+        }
+
+        function msgChanger(bool) {
+            let msg = document.getElementById("UItext");
+            if (bool) {
+                msg.value =    `player ${playerFlag} you are the winner!`
+            }else{
+                msg.value = ` player ${playerFlag} is your turn`;
+            }
+        }
+
+        function winCheck() {
+            for (let win = 0; win < wins.length; win++) {
+                let winner = true
+                let temp = wins[win]
+                for (let index = 0; index < temp.length; index++) {
+                    if (tictacLst[temp[index]] != playerFlag) {
+                        winner = false
+                    }
+                }
+                if (winner) {
+                    return true
+                }
+            }
+            return false
+        }
+
+
+
+    </script>
+</body>
+
+</html>

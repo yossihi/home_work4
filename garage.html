@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body
+    style="background-image: url(car\ back.avif);  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: rgb(6, 6, 6);">
+    <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Garage handler</h1>
+    <div style="display: flex;">
+        <div onclick="clearr()" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-size: larger;
+        ">
+            <p>Model <input id="model" type="number"></p>
+            <p>Color <input id="color" type="text"></p>
+            <p>Manufacture <input id="manufacture" type="text"></p>
+
+            <p>License <input id="ident" type="number"></p>
+            <br>
+            <div style="padding: 7px; margin: 10px;">
+                <button onclick="jsonSaver()">save</button>
+                <button onclick="deleteCar()">delete last car</button>
+                <h4>delete car by license</h4>
+                <input type="text" placeholder="ID" id="carId">
+                <button onclick="carSelector(carId.value)">Search and Delete</button>
+            </div>
+        </div>
+        <div style="padding: 50px;">
+            <table id="myTable">
+                <thead>
+                    <tr>
+                        <th style="width: 60px;">Model</th>
+                        <th style="width: 60px;">Color</th>
+                        <th style="width: 60px;">Manufacture</th>
+                        <th style="width: 60px;">License</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody" style="text-align: center;">
+                    <!-- Table body will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+
+        let cars = [{ "Model": 2012, "color": "red", "Manufacture": "toyota", "license": 243578 },
+        { "Model": 2018, "color": "blue", "Manufacture": "hunda", "license": 653476 },
+        { "Model": 2019, "color": "black", "Manufacture": "subaro", "license": 123409 }]
+
+        // Function to populate the table with JSON data
+        function populateTable(data) {
+            let tableBody = document.getElementById('tableBody');
+
+            // Clear existing table rows
+            tableBody.innerHTML = '';
+
+            data.forEach(item => {
+                let row = document.createElement('tr');
+
+                let ModelCell = document.createElement('td');
+                ModelCell.textContent = item.Model;
+
+                let colorCell = document.createElement('td');
+                colorCell.textContent = item.color;
+
+                let ManuCell = document.createElement('td');
+                ManuCell.textContent = item.Manufacture;
+
+                let idCell = document.createElement('td');
+                idCell.textContent = item.license;
+
+                row.appendChild(ModelCell);
+                row.appendChild(colorCell);
+                row.appendChild(ManuCell);
+                row.appendChild(idCell)
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        populateTable(cars)
+
+
+        // model, color, manufacture, id = write to json and print to the consol
+        // delete the last car
+        // * delete specific car
+
+
+
+        function jsonSaver() {
+            cars.push({ "Model": model.value, "color": color.value, "Manufacture": manufacture.value, "license": ident.value })
+            console.log(cars);
+            populateTable(cars)
+        }
+
+        function deleteCar() {
+            cars.pop()
+            console.log(cars);
+            populateTable(cars)
+        }
+
+        function clearr() {
+            model.value = ""
+            color.value = ""
+            manufacture.value = ""
+            ident.value = ""
+            carId.value = ""
+        }
+
+        function carSelector(ident) {
+            for (let index = 0; index < cars.length; index++) {
+                if (cars[index].license == +ident) {
+                    cars.splice(index, 1)
+                    console.log(cars);
+                }
+
+            }
+            populateTable(cars)
+        }
+
+    </script>
+</body>
+
+</html>

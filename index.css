@@ -1,0 +1,20 @@
+.btn {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+    background-color: rgb(194, 171, 216);
+    border-color: rgb(255, 165, 127);
+    color: rgb(3, 3, 3);
+    font-size: 70px;
+}
+
+.textbox {
+    width: 450px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: xx-large;
+    background-color: aquamarine;
+}
+
+.main {
+    background-image: url(backtic.jpg);
+}
