@@ -29,9 +29,9 @@
         let playerFlag = "X"
         let tictacLst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
 
-        let wins = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
-        [1, 4, 7], [2, 5, 8], [3, 6, 9],
-        [1, 5, 9], [3, 5, 7]]
+        let wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
+        [0, 4, 8], [2, 4, 6]]
 
         function btn_click() {
             if (event.target.innerText == "-") {
@@ -41,9 +41,9 @@
                 if (winCheck()) {
                     msgChanger(true)
 
-                }else{
+                } else {
                     playerFlag = playerFlag == "X" ? "O" : "X"
-                msgChanger()
+                    msgChanger()
                 }
             }
         }
@@ -51,8 +51,14 @@
         function msgChanger(bool) {
             let msg = document.getElementById("UItext");
             if (bool) {
-                msg.value =    `player ${playerFlag} you are the winner!`
-            }else{
+                msg.value = `player ${playerFlag} you are the winner!`
+                for (let index = 0; index < 9; index++) {
+                    let oneBtn = document.getElementById(`${index}`)
+                    if (oneBtn.innerText == "-") {
+                        oneBtn.disabled = true
+                    }
+                }
+            } else {
                 msg.value = ` player ${playerFlag} is your turn`;
             }
         }
@@ -68,6 +74,7 @@
                 }
                 if (winner) {
                     return true
+                    break
                 }
             }
             return false
