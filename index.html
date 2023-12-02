@@ -20,8 +20,8 @@
         <button class="btn" id="7">-</button>
         <button class="btn" id="8">-</button>
     </div>
-    <div>
-        <input class="textbox" type="text" id="UItext" value="player X please start the game">
+    <div id="UItext" class="textbox">
+        <h2>player X please start the game</h2>
     </div>
 
     <script>
@@ -51,7 +51,7 @@
         function msgChanger(bool) {
             let msg = document.getElementById("UItext");
             if (bool) {
-                msg.value = `player ${playerFlag} you are the winner!`
+                msg.innerHTML = `<h2>player X you won the game</h2>`;
                 for (let index = 0; index < 9; index++) {
                     let oneBtn = document.getElementById(`${index}`)
                     if (oneBtn.innerText == "-") {
@@ -59,7 +59,7 @@
                     }
                 }
             } else {
-                msg.value = ` player ${playerFlag} it's your turn`;
+                msg.innerHTML = `<h2>player ${playerFlag} it's your turn</h2>`;
             }
         }
 
