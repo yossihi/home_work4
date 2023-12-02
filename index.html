@@ -23,11 +23,16 @@
     <div id="UItext" class="textbox">
         <h2>player X please start the game</h2>
     </div>
+    <div>
+        <button onclick="restartGame()" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large;
+         background-color: rgb(149, 248, 248); border-color: aquamarine;">Restart the game</button>
+    </div>
 
     <script>
 
         let playerFlag = "X"
         let tictacLst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
+        let msg = document.getElementById("UItext");
 
         let wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8],
         [0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -49,7 +54,6 @@
         }
 
         function msgChanger(bool) {
-            let msg = document.getElementById("UItext");
             if (bool) {
                 msg.innerHTML = `<h2>player X you won the game</h2>`;
                 for (let index = 0; index < 9; index++) {
@@ -80,7 +84,17 @@
             return false
         }
 
+        function restartGame() {
+            for (let index = 0; index < 9; index++) {
+                let btn = document.getElementById(`${index}`)
+                btn.innerText = "-"
+                playerFlag = "X"
+                tictacLst = ["-", "-", "-", "-", "-", "-", "-", "-", "-"]
+                btn.disabled = false
 
+            }
+            msg.innerHTML = `<h2>player X please start the game</h2>`
+        }
 
     </script>
 </body>

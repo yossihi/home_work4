@@ -11,16 +11,18 @@
     style="background-image: url(car\ back.avif);  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; color: rgb(6, 6, 6);">
     <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Garage handler</h1>
     <div style="display: flex;">
-        <div onclick="clearr()" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        <div style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
         font-size: larger;
         ">
             <p>Model <input id="model" type="number"></p>
+
             <p>Color <input id="color" type="text"></p>
+
             <p>Manufacture <input id="manufacture" type="text"></p>
 
             <p>License <input id="ident" type="number"></p>
             <br>
-            <div style="padding: 7px; margin: 10px;">
+            <div onclick="clearr()" style="padding: 7px; margin: 10px;">
                 <button onclick="jsonSaver()">save</button>
                 <button onclick="deleteCar()">delete last car</button>
                 <h4>delete car by license</h4>
@@ -47,11 +49,9 @@
 
     <script>
 
-        let cars = [{ "Model": 2012, "color": "red", "Manufacture": "toyota", "license": 243578 },
-        { "Model": 2018, "color": "blue", "Manufacture": "hunda", "license": 653476 },
-        { "Model": 2019, "color": "black", "Manufacture": "subaro", "license": 123409 }]
+        let cars = []
 
-        // Function to populate the table with JSON data
+        // Function to populate the table with array data
         function populateTable(data) {
             let tableBody = document.getElementById('tableBody');
 
@@ -82,27 +82,22 @@
             });
         }
 
-        populateTable(cars)
 
-
-        // model, color, manufacture, id = write to json and print to the consol
-        // delete the last car
-        // * delete specific car
-
-
-
+        //function that stor the input in JSON format
         function jsonSaver() {
             cars.push({ "Model": model.value, "color": color.value, "Manufacture": manufacture.value, "license": ident.value })
             console.log(cars);
             populateTable(cars)
         }
 
+        //function that delete the last car 
         function deleteCar() {
             cars.pop()
             console.log(cars);
             populateTable(cars)
         }
 
+        //function that clear the content of all the input 
         function clearr() {
             model.value = ""
             color.value = ""
@@ -111,6 +106,7 @@
             carId.value = ""
         }
 
+        // function that delete car by ID
         function carSelector(ident) {
             for (let index = 0; index < cars.length; index++) {
                 if (cars[index].license == +ident) {
